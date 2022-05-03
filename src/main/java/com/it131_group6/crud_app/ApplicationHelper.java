@@ -19,13 +19,20 @@ import javax.swing.table.DefaultTableModel;
 // Make Singleton
 public class ApplicationHelper {
     
+    // Service, may compile them under ServiceProvider Class but lacking time :(
     private DatabaseService db_service;
+    private FileService file_service;
+    
     private static ApplicationHelper s_instance;
     private ApplicationHelper() {
         db_service = new DatabaseService();
+        file_service = new FileService();
     }
     
     public void InitEnv() {
+        file_service.InitializeEnv();
+        DataModel.ConfigData configData = file_service.getDatabaseConfig();
+        db_service.InitializeDatabaseConfig(configData.Username, configData.Password);
         db_service.InitializeEnv();
     }
     
@@ -89,7 +96,13 @@ public class ApplicationHelper {
                 
                 arrayList = db_service.ReadItemsFromTable(CurrentTab);
                 arrayList.stream().map(contract -> (DataModel.Contract)contract).forEachOrdered(contractHolder -> {
-                    DTM.addRow(new Object[] {contractHolder.ContNo, contractHolder.ContLockedIn, contractHolder.ContWaterDisp, contractHolder.ContContainer, contractHolder.ContWatAnalysis, contractHolder.ContAmtPerMon, contractHolder.Duration, contractHolder.ContSDate, contractHolder.ContEDate, contractHolder.ContCustNo, contractHolder.ContEmpNo});
+                    // All PKs are in autoincrement so no key should be 0
+                    if(contractHolder.Duration != 0) {
+                        DTM.addRow(new Object[] {contractHolder.ContNo, contractHolder.ContLockedIn, contractHolder.ContWaterDisp, contractHolder.ContContainer, contractHolder.ContWatAnalysis, contractHolder.ContAmtPerMon, contractHolder.Duration, contractHolder.ContSDate, contractHolder.ContEDate, contractHolder.ContCustNo, contractHolder.ContEmpNo});
+                    }
+                    else {
+                        DTM.addRow(new Object[] {contractHolder.ContNo, contractHolder.ContLockedIn, contractHolder.ContWaterDisp, contractHolder.ContContainer, contractHolder.ContWatAnalysis, contractHolder.ContAmtPerMon, "", contractHolder.ContSDate, contractHolder.ContEDate, contractHolder.ContCustNo, contractHolder.ContEmpNo});
+                    }
                 });
                 break;
             case 4:
@@ -98,7 +111,14 @@ public class ApplicationHelper {
                 
                 arrayList = db_service.ReadItemsFromTable(CurrentTab);
                 arrayList.stream().map(order -> (DataModel.Order)order).forEachOrdered(orderHolder -> {
-                    DTM.addRow(new Object[] {orderHolder.OrdNo, orderHolder.OrdEmpNo, orderHolder.OrdDeliverDate, orderHolder.OrdDeliverAddr, orderHolder.OrdContNo, orderHolder.OrdPayNo});
+                    
+                    // All PKs are in autoincrement so no key should be 0
+                    if(orderHolder.OrdPayNo != 0) {
+                        DTM.addRow(new Object[] {orderHolder.OrdNo, orderHolder.OrdEmpNo, orderHolder.OrdDeliverDate, orderHolder.OrdDeliverAddr, orderHolder.OrdContNo, orderHolder.OrdPayNo});
+                    }
+                    else {
+                        DTM.addRow(new Object[] {orderHolder.OrdNo, orderHolder.OrdEmpNo, orderHolder.OrdDeliverDate, orderHolder.OrdDeliverAddr, orderHolder.OrdContNo, ""});
+                    }
                 });
                 break;
             case 5:
@@ -145,6 +165,12 @@ public class ApplicationHelper {
         // Check Inputs
         // Pass Inputs to Database
         db_service.DeleteItemFromTable(Data, Table);
+        
+        return true;
+    }
+
+    public boolean Remove(String Type, String Name) {
+        db_service.Remove(Type, Name);
         
         return true;
     }

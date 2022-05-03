@@ -5,7 +5,6 @@
  */
 package com.it131_group6.crud_app;
 
-import com.it131_group6.crud_app.DataModel;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -15,20 +14,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author hp
  */
-
+/*
+ * SQLs are not using prepared statements and thus, more vulnerable to SQL injections
+ *
+ */
 public class DatabaseService {
     
-    private final String USERNAME = "root";
-    private final String PASSWORD = "tTyAnp8wX73CscU3";
+    private String USERNAME = "";
+    private String PASSWORD = "";
     private final String LINK = String.format("jdbc:mysql://localhost?useTimezone=true&serverTimezone=UTC");
     private final String CONNECTOR = "com.mysql.cj.jdbc.Driver";
     
     public DatabaseService() {}
+    
+    public void InitializeDatabaseConfig(String Username, String Password) {
+        USERNAME = Username;
+        PASSWORD = Password;
+    }
     
     public void InitializeEnv() {
         try { Class.forName(CONNECTOR); } catch(ClassNotFoundException ex) {}
@@ -210,17 +218,33 @@ public class DatabaseService {
                     break;
                 case "Contract":
                     DataModel.Contract contract = (DataModel.Contract)Data;
-                    QueryStr = String.format("INSERT INTO Contract ("
+                    if(contract.Duration != null) {
+                        QueryStr = String.format("INSERT INTO Contract ("
                             + "ContNo, ContLockedIn, ContWaterDisp, ContContainer, ContWatAnalysis, ContAmtPerMon, ContDuration, ContSDate, ContEDate, ContCustNo, ContEmpNo) "
                             + "VALUES (NULL, %b, %b, %b, %b, \"%d\", \"%d\", \"%s\", \"%s\", \"%d\", \"%d\")",
                             contract.ContLockedIn, contract.ContWaterDisp, contract.ContContainer, contract.ContWatAnalysis, contract.ContAmtPerMon, contract.Duration, contract.ContSDate, contract.ContEDate, contract.ContCustNo, contract.ContEmpNo);
+                    }
+                    else {
+                        QueryStr = String.format("INSERT INTO Contract ("
+                            + "ContNo, ContLockedIn, ContWaterDisp, ContContainer, ContWatAnalysis, ContAmtPerMon, ContDuration, ContSDate, ContEDate, ContCustNo, ContEmpNo) "
+                            + "VALUES (NULL, %b, %b, %b, %b, \"%d\", NULL, \"%s\", \"%s\", \"%d\", \"%d\")",
+                            contract.ContLockedIn, contract.ContWaterDisp, contract.ContContainer, contract.ContWatAnalysis, contract.ContAmtPerMon, contract.ContSDate, contract.ContEDate, contract.ContCustNo, contract.ContEmpNo);
+                    }
                     break;
                 case "Order_":
                     DataModel.Order order = (DataModel.Order)Data;
-                    QueryStr = String.format("INSERT INTO Order_ ("
+                    if(order.OrdPayNo != null) {
+                        QueryStr = String.format("INSERT INTO Order_ ("
                             + "OrdEmpNo, OrdNo, OrdDeliverDate, OrdDeliverAddr, OrdContNo, OrdPayNo)"
                             + "VALUES (\"%d\", NULL, \"%s\", \"%s\", \"%d\", \"%d\")",
                             order.OrdEmpNo, order.OrdDeliverDate, order.OrdDeliverAddr, order.OrdContNo, order.OrdPayNo);
+                    }
+                    else {
+                        QueryStr = String.format("INSERT INTO Order_ ("
+                            + "OrdEmpNo, OrdNo, OrdDeliverDate, OrdDeliverAddr, OrdContNo, OrdPayNo)"
+                            + "VALUES (\"%d\", NULL, \"%s\", \"%s\", \"%d\", NULL)",
+                            order.OrdEmpNo, order.OrdDeliverDate, order.OrdDeliverAddr, order.OrdContNo);
+                    }
                     break;
                 case "Payment":
                     DataModel.Payment payment = (DataModel.Payment)Data;
@@ -255,6 +279,7 @@ public class DatabaseService {
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -389,6 +414,7 @@ public class DatabaseService {
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -443,7 +469,8 @@ public class DatabaseService {
                     break;
                 case "Contract":
                     DataModel.Contract contract = (DataModel.Contract)Data;
-                    QueryStr = String.format("UPDATE Contract "
+                    if(contract.Duration != null) {
+                        QueryStr = String.format("UPDATE Contract "
                                           + "SET ContLockedIn = %b,"
                                           + "ContWaterDisp = %b,"
                                           + "ContContainer = %b,"
@@ -456,10 +483,27 @@ public class DatabaseService {
                                           + "ContEmpNo = \"%d\" "
                                           + "WHERE ContNo = \"%d\"",
                             contract.ContLockedIn, contract.ContWaterDisp, contract.ContContainer, contract.ContWatAnalysis, contract.ContAmtPerMon, contract.Duration, contract.ContSDate, contract.ContEDate, contract.ContCustNo, contract.ContEmpNo, contract.ContNo);
+                    }
+                    else {
+                         QueryStr = String.format("UPDATE Contract "
+                                          + "SET ContLockedIn = %b,"
+                                          + "ContWaterDisp = %b,"
+                                          + "ContContainer = %b,"
+                                          + "ContWatAnalysis = %b,"
+                                          + "ContAmtPerMon = \"%d\","
+                                          + "ContDuration = NULL,"
+                                          + "ContSDate = \"%s\","
+                                          + "ContEDate = \"%s\","
+                                          + "ContCustNo = \"%d\","
+                                          + "ContEmpNo = \"%d\" "
+                                          + "WHERE ContNo = \"%d\"",
+                            contract.ContLockedIn, contract.ContWaterDisp, contract.ContContainer, contract.ContWatAnalysis, contract.ContAmtPerMon, contract.ContSDate, contract.ContEDate, contract.ContCustNo, contract.ContEmpNo, contract.ContNo);
+                    }
                     break;
                 case "Order_":
                     DataModel.Order order = (DataModel.Order)Data;
-                    QueryStr = String.format("UPDATE Order_ "
+                    if(order.OrdPayNo != null) {
+                        QueryStr = String.format("UPDATE Order_ "
                                           + "SET OrdEmpNo = \"%d\","
                                           + "OrdDeliverDate = \"%s\","
                                           + "OrdDeliverAddr = \"%s\","
@@ -467,6 +511,17 @@ public class DatabaseService {
                                           + "OrdPayNo = \"%d\" "
                                           + "WHERE OrdNo = \"%d\"",
                             order.OrdEmpNo, order.OrdDeliverDate, order.OrdDeliverAddr, order.OrdContNo, order.OrdPayNo, order.OrdNo);
+                    }
+                    else {
+                        QueryStr = String.format("UPDATE Order_ "
+                                          + "SET OrdEmpNo = \"%d\","
+                                          + "OrdDeliverDate = \"%s\","
+                                          + "OrdDeliverAddr = \"%s\","
+                                          + "OrdContNo = \"%d\","
+                                          + "OrdPayNo = NULL "
+                                          + "WHERE OrdNo = \"%d\"",
+                            order.OrdEmpNo, order.OrdDeliverDate, order.OrdDeliverAddr, order.OrdContNo, order.OrdNo);
+                    }
                     break;
                 case "Payment":
                     DataModel.Payment payment = (DataModel.Payment)Data;
@@ -506,6 +561,7 @@ public class DatabaseService {
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -571,11 +627,41 @@ public class DatabaseService {
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    
+    public void Remove(String Type, String Name) {
+        try
+        {
+            Connection sql_con = DriverManager.getConnection(LINK, USERNAME, PASSWORD);
+            
+            String QueryStr = "";
+            
+            switch(Type) {
+                case "Table Contents":
+                    QueryStr = String.format("TRUNCATE TABLE %s", Name);
+                    break;
+                case "Database":
+                    QueryStr = String.format("DROP DATABASE %s", Name);
+                    break;
+            }
+            
+            Statement SetDB = sql_con.createStatement();
+            SetDB.executeUpdate("USE crud_app;");
+            
+            Statement Query = sql_con.createStatement();
+            Query.executeUpdate(QueryStr);
+            
+            sql_con.close();
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
     
@@ -603,6 +689,7 @@ public class DatabaseService {
         return false;
     }
     
+    // Source: https://stackoverflow.com/questions/838978/how-to-check-if-mysql-database-exists
     private boolean isTableExists(String TableName) {
         try {
             Connection sql_con = DriverManager.getConnection(LINK, USERNAME, PASSWORD);

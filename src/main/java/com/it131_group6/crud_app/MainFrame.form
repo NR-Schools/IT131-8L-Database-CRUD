@@ -30,24 +30,24 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ResetForm" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Component id="ResetForm" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="AddButton" max="32767" attributes="0"/>
                                   <Component id="UpdateButton" alignment="0" pref="100" max="32767" attributes="0"/>
                                   <Component id="DeleteButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="ClearTable" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RemoveDatabase" max="32767" attributes="0"/>
-                                  <Component id="RemoveThisTable" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="RemoveDatabase" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="ScrollPane" pref="710" max="32767" attributes="0"/>
           </Group>
           <Component id="JPanel1" max="32767" attributes="0"/>
@@ -70,13 +70,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="UpdateButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="RemoveThisTable" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="DeleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="RemoveDatabase" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="DeleteButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ResetForm" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1174,14 +1171,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveDatabaseActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="RemoveThisTable">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Remove This Table"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveThisTableActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -155,7 +155,6 @@ public class MainFrame extends javax.swing.JFrame {
         AddButton = new javax.swing.JButton();
         ResetForm = new javax.swing.JButton();
         RemoveDatabase = new javax.swing.JButton();
-        RemoveThisTable = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -778,13 +777,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        RemoveThisTable.setText("Remove This Table");
-        RemoveThisTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoveThisTableActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -802,11 +794,11 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(UpdateButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                     .addComponent(DeleteButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ClearTable)
-                                    .addComponent(RemoveDatabase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(RemoveThisTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RemoveDatabase))))
+                        .addGap(10, 10, 10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE))
             .addComponent(JPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -826,11 +818,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(UpdateButton)
-                            .addComponent(RemoveThisTable))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DeleteButton)
                             .addComponent(RemoveDatabase))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ResetForm)
                         .addContainerGap())))
@@ -962,7 +952,13 @@ public class MainFrame extends javax.swing.JFrame {
                 contract.ContWatAnalysis = Boolean.parseBoolean(ContWatAnalysis.getSelectedItem().toString());
                 
                 contract.ContAmtPerMon = Integer.parseInt(ContAmtPerMon.getText().strip());
-                contract.Duration = Integer.parseInt(ContDuration.getText().strip());
+                
+                try {
+                    contract.Duration = Integer.parseInt(ContDuration.getText().strip());
+                }
+                catch(NumberFormatException ex) {
+                    contract.Duration = null;
+                }
                 
                 contract.ContSDate = sdm.format(ContSDate.getDate());
                 contract.ContEDate = sdm.format(ContEDate.getDate());
@@ -994,6 +990,7 @@ public class MainFrame extends javax.swing.JFrame {
                     ContEmpNo.setText("");
                 }
                 break;
+
             case 4:
                 CurrentTab = "Order_";
                 DataModel.Order order = new DataModel(). new Order();
@@ -1219,7 +1216,13 @@ public class MainFrame extends javax.swing.JFrame {
                 contract.ContWatAnalysis = Boolean.parseBoolean(ContWatAnalysis.getSelectedItem().toString());
                 
                 contract.ContAmtPerMon = Integer.parseInt(ContAmtPerMon.getText().strip());
-                contract.Duration = Integer.parseInt(ContDuration.getText().strip());
+                
+                try {
+                    contract.Duration = Integer.parseInt(ContDuration.getText().strip());
+                }
+                catch(NumberFormatException ex) {
+                    contract.Duration = null;
+                }
                 
                 contract.ContSDate = new SimpleDateFormat("yyyy-MM-dd").format(ContSDate.getDate());
                 contract.ContEDate = new SimpleDateFormat("yyyy-MM-dd").format(ContEDate.getDate());
@@ -1262,7 +1265,13 @@ public class MainFrame extends javax.swing.JFrame {
                 order.OrdDeliverDate = new SimpleDateFormat("yyyy-MM-dd").format(OrdDeliverDate.getDate());
                 order.OrdDeliverAddr = OrdDeliverAddr.getText().strip();
                 order.OrdContNo = Integer.parseInt(OrdContNo.getText().strip());
-                order.OrdPayNo = Integer.parseInt(OrdPayNo.getText().strip());
+                
+                try {
+                    order.OrdPayNo = Integer.parseInt(OrdPayNo.getText().strip());
+                }
+                catch(NumberFormatException ex) {
+                    order.OrdPayNo = null;
+                }
                 
                 // Send To Database
                 if(ApplicationHelper.getHelper().UpdateExistingItem(order, CurrentTab)) {
@@ -1280,6 +1289,7 @@ public class MainFrame extends javax.swing.JFrame {
                     OrdPayNo.setText("");
                 }
                 break;
+
             case 5:
                 CurrentTab = "Payment";
                 DataModel.Payment payment = new DataModel(). new Payment();
@@ -1421,10 +1431,11 @@ public class MainFrame extends javax.swing.JFrame {
             case 4:
                 try {
                     OrdNo = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
-                    OrdDeliverDate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 1).toString()));
-                    OrdDeliverAddr.setText(SQLTable.getValueAt(rowSelected, 2).toString());
-                    OrdContNo.setText(SQLTable.getValueAt(rowSelected, 3).toString());
-                    OrdPayNo.setText(SQLTable.getValueAt(rowSelected, 4).toString());
+                    OrdEmpNo.setText(SQLTable.getValueAt(rowSelected, 1).toString());
+                    OrdDeliverDate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 2).toString()));
+                    OrdDeliverAddr.setText(SQLTable.getValueAt(rowSelected, 3).toString());
+                    OrdContNo.setText(SQLTable.getValueAt(rowSelected, 4).toString());
+                    OrdPayNo.setText(SQLTable.getValueAt(rowSelected, 5).toString());
                 }
                 catch(ParseException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -1718,41 +1729,45 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void ClearTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearTableActionPerformed
         // TODO add your handling code here:
-        
-        switch(CurrentTabIndex) {
-            case 0:
-                break;
-            case 1:
-                //CurrentTab = "Employee";
-                break;
-            case 2:
-                //CurrentTab = "Job";
-                break;
-            case 3:
-                //CurrentTab = "Contract";
-                break;
-            case 4:
-                //CurrentTab = "Order_";
-                break;
-            case 5:
-                //CurrentTab = "Payment";
-                break;
-            case 6:
-                //CurrentTab = "SupplyOrder";
-                break;
-            case 7:
-                //CurrentTab = "Supply";
-                break;
+        int result = JOptionPane.showConfirmDialog(rootPane, "Do you want to proceed with the operation? (will remove contents of the current table)");
+        if(result == JOptionPane.YES_OPTION) {
+            switch(CurrentTabIndex) {
+                case 0:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "Customer");
+                    break;
+                case 1:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "Employee");
+                    break;
+                case 2:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "Job");
+                    break;
+                case 3:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "Contract");
+                    break;
+                case 4:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "Order_");
+                    break;
+                case 5:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "Payment");
+                    break;
+                case 6:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "SupplyOrder");
+                    break;
+                case 7:
+                    ApplicationHelper.getHelper().Remove("Table Contents", "Supply");
+                    break;
+            }
         }
     }//GEN-LAST:event_ClearTableActionPerformed
 
     private void RemoveDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveDatabaseActionPerformed
         // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(rootPane, "Do you want to proceed with the operation? (will remove database and close the application, opening it will restore database and tables)");
+        if(result == JOptionPane.YES_OPTION) {
+            ApplicationHelper.getHelper().Remove("Database", "crud_app");
+            System.exit(0);
+        }
     }//GEN-LAST:event_RemoveDatabaseActionPerformed
-
-    private void RemoveThisTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveThisTableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RemoveThisTableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1835,7 +1850,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField PayAmt;
     private com.toedter.calendar.JDateChooser PayDate;
     private javax.swing.JButton RemoveDatabase;
-    private javax.swing.JButton RemoveThisTable;
     private javax.swing.JButton ResetForm;
     private javax.swing.JTextField SO_OrdNo;
     private javax.swing.JTextField SO_Quantity;

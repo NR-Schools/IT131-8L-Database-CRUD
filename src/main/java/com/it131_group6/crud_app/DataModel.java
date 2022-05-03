@@ -42,7 +42,7 @@ public class DataModel {
         public boolean ContContainer;
         public boolean ContWatAnalysis;
         public int ContAmtPerMon;
-        public int Duration;
+        public Integer Duration;
         public String ContSDate;
         public String ContEDate;
         public int ContCustNo;
@@ -85,5 +85,13 @@ public class DataModel {
         public String SupplyName;
         public int SupplyQOH;
         public int SupplyPrice;
+    }
+    
+    
+    
+    
+    public class ConfigData {
+        String Username;
+        String Password;
     }
 }
