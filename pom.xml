@@ -37,7 +37,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.it131_group6.crud_app.MainFrame</mainClass>
+                            <mainClass>com.it131_group6.crud_app.PreFrame</mainClass>
                             <classpathPrefix>java/</classpathPrefix>
                         </manifest>
                     </archive>
@@ -80,7 +80,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.it131_group6.crud_app.MainFrame</mainClass>
+                            <mainClass>com.it131_group6.crud_app.PreFrame</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

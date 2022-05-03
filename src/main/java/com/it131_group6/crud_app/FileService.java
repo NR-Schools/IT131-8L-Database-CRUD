@@ -29,7 +29,7 @@ public class FileService {
         //
     }
     
-    public void InitializeEnv() {
+    public void setDatabaseConfig(String Username, String Password) {
         try {
             // Create SQL File to Pull Username and Password
             File nFile = new File(DB_CONFIG_FILE);
@@ -37,22 +37,21 @@ public class FileService {
             if(!nFile.exists()) {
                 // Create File
                 nFile.createNewFile();
-                
-                // Write To File
-                BufferedWriter writeFile = new BufferedWriter(new FileWriter(nFile));
-                
-                // Populate with some db configs :: IMPROVEMENT (Can be stored using json)
-                writeFile.write("root");
-                writeFile.newLine();
-                
-                writeFile.write("tTyAnp8wX73CscU3");
-                writeFile.newLine();
-                
-                // Close Buffer
-                writeFile.close();
             }
+            
+            // Write To File
+            BufferedWriter writeFile = new BufferedWriter(new FileWriter(nFile));
+                
+            // Populate with some db configs :: IMPROVEMENT (Can be stored using json)
+            writeFile.write(Username); // username
+            writeFile.newLine();
+            writeFile.write(Password); // password
+            writeFile.newLine();
+            
+            // Close Buffer
+            writeFile.close();
         }
-        catch(Exception ex) {
+        catch(IOException ex) {
             Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -62,12 +61,10 @@ public class FileService {
             DataModel.ConfigData configData = new DataModel(). new ConfigData();
             
             File configFile = new File(DB_CONFIG_FILE);
-            BufferedReader readConfig = new BufferedReader(new FileReader(configFile));
-            
-            configData.Username = readConfig.readLine();
-            configData.Password = readConfig.readLine();
-            
-            readConfig.close();
+            try (BufferedReader readConfig = new BufferedReader(new FileReader(configFile))) {
+                configData.Username = readConfig.readLine();
+                configData.Password = readConfig.readLine();
+            }
             return configData;
         }
         catch(FileNotFoundException ex) {

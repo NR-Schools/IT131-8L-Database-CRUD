@@ -5,6 +5,9 @@
  */
 package com.it131_group6.crud_app;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +33,6 @@ public class ApplicationHelper {
     }
     
     public void InitEnv() {
-        file_service.InitializeEnv();
         DataModel.ConfigData configData = file_service.getDatabaseConfig();
         db_service.InitializeDatabaseConfig(configData.Username, configData.Password);
         db_service.InitializeEnv();
@@ -171,6 +173,37 @@ public class ApplicationHelper {
 
     public boolean Remove(String Type, String Name) {
         db_service.Remove(Type, Name);
+        
+        return true;
+    }
+
+
+    public boolean CheckMySQLConnection(String Username, String Password) {
+        try {
+            Connection test_conn = DriverManager.getConnection("jdbc:mysql://localhost?useTimezone=true&serverTimezone=UTC", Username, Password);
+            test_conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ApplicationHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public void StoreConfigToLocal(String Username, String Password) {
+        file_service.setDatabaseConfig(Username, Password);
+    }
+
+    public boolean SkipSetup() {
+        // Get Current Config (null if none)
+        DataModel.ConfigData configData = file_service.getDatabaseConfig();
+        
+        // Check If File Exists
+        if(configData == null)
+            return false;
+        
+        // Check If Config is working
+        if(!CheckMySQLConnection(configData.Username, configData.Password))
+            return false;
         
         return true;
     }

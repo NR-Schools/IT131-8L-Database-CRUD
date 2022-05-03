@@ -28,7 +28,7 @@ public class DatabaseService {
     
     private String USERNAME = "";
     private String PASSWORD = "";
-    private final String LINK = String.format("jdbc:mysql://localhost?useTimezone=true&serverTimezone=UTC");
+    private final String LINK = "jdbc:mysql://localhost?useTimezone=true&serverTimezone=UTC";
     private final String CONNECTOR = "com.mysql.cj.jdbc.Driver";
     
     public DatabaseService() {}
