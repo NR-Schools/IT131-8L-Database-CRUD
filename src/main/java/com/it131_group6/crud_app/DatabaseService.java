@@ -101,7 +101,7 @@ public class DatabaseService {
                         + "EmpHireDate DATE NOT NULL,"
                         + "EmpJobCode INTEGER(10),"
                         + "CHECK ( EmpSex in ('M', 'F') ),"
-                        + "FOREIGN KEY (EmpJobCode) REFERENCES Job(JobCode))"
+                        + "FOREIGN KEY (EmpJobCode) REFERENCES Job(JobCode) ON DELETE CASCADE)"
                 );
             }
             
@@ -119,9 +119,9 @@ public class DatabaseService {
                         + "ContSDate DATE NOT NULL,"
                         + "ContEDate DATE NOT NULL,"
                         + "ContCustNo INTEGER(10) NOT NULL,"
-                        + "FOREIGN KEY (ContCustNo) REFERENCES Customer(CustNo),"
+                        + "FOREIGN KEY (ContCustNo) REFERENCES Customer(CustNo) ON DELETE CASCADE,"
                         + "ContEmpNo INTEGER(10) NOT NULL,"
-                        + "FOREIGN KEY (ContEmpNo) REFERENCES Employee(EmpNo))"
+                        + "FOREIGN KEY (ContEmpNo) REFERENCES Employee(EmpNo) ON DELETE CASCADE)"
                 );
             }
             
@@ -147,9 +147,9 @@ public class DatabaseService {
                         + "OrdDeliverAddr VARCHAR(255) NOT NULL,"
                         + "OrdContNo INTEGER(10) NOT NULL,"
                         + "OrdPayNo INTEGER(10),"
-                        + "FOREIGN KEY (OrdEmpNo) REFERENCES Employee(EmpNo),"
-                        + "FOREIGN KEY (OrdContNo) REFERENCES Contract(ContNo),"
-                        + "FOREIGN KEY (OrdPayNo) REFERENCES Payment(PayNo))"
+                        + "FOREIGN KEY (OrdEmpNo) REFERENCES Employee(EmpNo) ON DELETE CASCADE,"
+                        + "FOREIGN KEY (OrdContNo) REFERENCES Contract(ContNo) ON DELETE CASCADE,"
+                        + "FOREIGN KEY (OrdPayNo) REFERENCES Payment(PayNo) ON DELETE CASCADE)"
                 );
             }
             
@@ -172,8 +172,8 @@ public class DatabaseService {
                         + "SupplyNo INTEGER(10),"
                         + "OrdNo INTEGER(10),"
                         + "SupplyOrderQty INTEGER(10) NOT NULL,"
-                        + "FOREIGN KEY (SupplyNo) REFERENCES Supply(SupplyNo),"
-                        + "FOREIGN KEY (OrdNo) REFERENCES Order_(OrdNo),"
+                        + "FOREIGN KEY (SupplyNo) REFERENCES Supply(SupplyNo) ON DELETE CASCADE,"
+                        + "FOREIGN KEY (OrdNo) REFERENCES Order_(OrdNo) ON DELETE CASCADE,"
                         + "PRIMARY KEY (SupplyNo, OrdNo))"
                 );
             }
@@ -186,7 +186,7 @@ public class DatabaseService {
         }
     }
     
-    public void AddItemToTable(Object Data, String Table) {
+    public boolean AddItemToTable(Object Data, String Table) {
         try
         {
             Connection sql_con = DriverManager.getConnection(LINK, USERNAME, PASSWORD);
@@ -281,7 +281,9 @@ public class DatabaseService {
         {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
     
     public ArrayList<Object> ReadItemsFromTable(String Table) {
@@ -420,7 +422,7 @@ public class DatabaseService {
         return null;
     }
     
-    public void UpdateItemFromTable(Object Data, String Table) {
+    public boolean UpdateItemFromTable(Object Data, String Table) {
         try
         {
             Connection sql_con = DriverManager.getConnection(LINK, USERNAME, PASSWORD);
@@ -563,10 +565,12 @@ public class DatabaseService {
         {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
     
-    public void DeleteItemFromTable(Object Data, String Table) {
+    public boolean DeleteItemFromTable(Object Data, String Table) {
         try
         {
             Connection sql_con = DriverManager.getConnection(LINK, USERNAME, PASSWORD);
@@ -629,7 +633,9 @@ public class DatabaseService {
         {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
     
     public void Remove(String Type, String Name) {
@@ -641,7 +647,7 @@ public class DatabaseService {
             
             switch(Type) {
                 case "Table Contents":
-                    QueryStr = String.format("TRUNCATE TABLE %s", Name);
+                    QueryStr = String.format("DELETE FROM %s", Name);
                     break;
                 case "Database":
                     QueryStr = String.format("DROP DATABASE %s", Name);
@@ -689,7 +695,6 @@ public class DatabaseService {
         return false;
     }
     
-    // Source: https://stackoverflow.com/questions/838978/how-to-check-if-mysql-database-exists
     private boolean isTableExists(String TableName) {
         try {
             Connection sql_con = DriverManager.getConnection(LINK, USERNAME, PASSWORD);

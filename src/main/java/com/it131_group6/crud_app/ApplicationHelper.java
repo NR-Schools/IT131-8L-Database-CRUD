@@ -47,9 +47,7 @@ public class ApplicationHelper {
     public boolean AddNewItem(Object Data, String Table) {
         try {
             // Pass Inputs to Database
-            db_service.AddItemToTable(Data, Table);
-            
-            return true;
+            return db_service.AddItemToTable(Data, Table);
         }
         catch(Exception ex) {
             Logger.getLogger(DatabaseService.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,17 +156,13 @@ public class ApplicationHelper {
     public boolean UpdateExistingItem(Object NewData, String Table) {
         // Check Inputs
         // Pass Inputs to Database
-        db_service.UpdateItemFromTable(NewData, Table);
-        
-        return true;
+        return db_service.UpdateItemFromTable(NewData, Table);
     }
     
     public boolean DeleteExistingItem(Object Data, String Table) {
         // Check Inputs
         // Pass Inputs to Database
-        db_service.DeleteItemFromTable(Data, Table);
-        
-        return true;
+        return db_service.DeleteItemFromTable(Data, Table);
     }
 
     public boolean Remove(String Type, String Name) {
