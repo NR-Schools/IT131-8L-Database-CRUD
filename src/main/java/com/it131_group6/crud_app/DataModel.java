@@ -17,7 +17,7 @@ public class DataModel {
         public char CustSex;
         public String CustDOB;
         public String CustAddr;
-        public int CustContactNo;
+        public String CustContactNo;
         public String CustEmail;
     }
     
@@ -55,7 +55,7 @@ public class DataModel {
         public String OrdDeliverDate;
         public String OrdDeliverAddr;
         public int OrdContNo;
-        public int OrdPayNo;
+        public Integer OrdPayNo; // Use Integer class
     }
     
     public class Payment {
@@ -68,13 +68,16 @@ public class DataModel {
         public int JobCode;
         public String JobPos;
         public String JobDesc;
-        public String JobSal;
+        public int JobSal;
     }
     
     public class SupplyOrder {
         public int SupplyNo;
         public int OrdNo;
         public int SupplyOrderQty;
+        
+        public int OldSupplyNo;
+        public int OldOrdNo;
     }
     
     public class Supply {

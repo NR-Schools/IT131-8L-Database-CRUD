@@ -5,6 +5,14 @@
  */
 package com.it131_group6.crud_app;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hp
@@ -14,8 +22,23 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    
+    public int CurrentTabIndex = 0;
+    
+    public int CustNo = 0;
+    public int EmpNo = 0;
+    public int JobCode = 0;
+    public int ContNo = 0;
+    public int OrdNo = 0;
+    public int PayNo = 0;
+    public int SupplyNo = 0;
+    public int SO_SupplyNo_ = 0;
+    public int SO_OrdNo_ = 0;
+    
     public MainFrame() {
+        ApplicationHelper.getHelper().InitEnv();
         initComponents();
+        ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
     }
 
     /**
@@ -27,24 +50,24 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        JPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        TabbedPane = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        CustFName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        CustLName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        CustSex = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        CustAddr = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        CustContactNo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        CustEmail = new javax.swing.JTextField();
+        CustDOB = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -53,110 +76,114 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        EmpFName = new javax.swing.JTextField();
+        EmpLName = new javax.swing.JTextField();
+        EmpSex = new javax.swing.JTextField();
+        EmpDOB = new com.toedter.calendar.JDateChooser();
+        EmpAddr = new javax.swing.JTextField();
+        EmpContactNo = new javax.swing.JTextField();
+        EmpEmail = new javax.swing.JTextField();
+        EmpTIN = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        EmpJobCode = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        EmpHireDate = new com.toedter.calendar.JDateChooser();
         jPanel9 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
+        JobPos = new javax.swing.JTextField();
+        JobDesc = new javax.swing.JTextField();
+        JobSal = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        ContLockedIn = new javax.swing.JComboBox<>();
+        ContWaterDisp = new javax.swing.JComboBox<>();
+        ContContainer = new javax.swing.JComboBox<>();
+        ContWatAnalysis = new javax.swing.JComboBox<>();
         jLabel23 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        ContAmtPerMon = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        ContDuration = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jDateChooser4 = new com.toedter.calendar.JDateChooser();
-        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        ContSDate = new com.toedter.calendar.JDateChooser();
+        ContEDate = new com.toedter.calendar.JDateChooser();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
+        ContCustNo = new javax.swing.JTextField();
+        ContEmpNo = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
+        OrdEmpNo = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jTextField21 = new javax.swing.JTextField();
-        jDateChooser6 = new com.toedter.calendar.JDateChooser();
+        OrdDeliverAddr = new javax.swing.JTextField();
+        OrdDeliverDate = new com.toedter.calendar.JDateChooser();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField23 = new javax.swing.JTextField();
+        OrdContNo = new javax.swing.JTextField();
+        OrdPayNo = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        jTextField27 = new javax.swing.JTextField();
-        jDateChooser7 = new com.toedter.calendar.JDateChooser();
+        PayAmt = new javax.swing.JTextField();
+        PayDate = new com.toedter.calendar.JDateChooser();
         jPanel8 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
-        jTextField26 = new javax.swing.JTextField();
+        SO_SupplyNo = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
-        jTextField28 = new javax.swing.JTextField();
+        SO_OrdNo = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
-        jTextField29 = new javax.swing.JTextField();
+        SO_Quantity = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        jTextField30 = new javax.swing.JTextField();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        SupplyName = new javax.swing.JTextField();
+        SupplyQOH = new javax.swing.JTextField();
+        SupplyPrice = new javax.swing.JTextField();
+        ScrollPane = new javax.swing.JScrollPane();
+        SQLTable = new javax.swing.JTable();
+        UpdateButton = new javax.swing.JButton();
+        ClearTable = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
         AddButton = new javax.swing.JButton();
+        ResetForm = new javax.swing.JButton();
+        RemoveDatabase = new javax.swing.JButton();
+        RemoveThisTable = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        JPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CRUD App");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout JPanel1Layout = new javax.swing.GroupLayout(JPanel1);
+        JPanel1.setLayout(JPanel1Layout);
+        JPanel1Layout.setHorizontalGroup(
+            JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        JPanel1Layout.setVerticalGroup(
+            JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+        TabbedPane.setBackground(new java.awt.Color(204, 204, 204));
+        TabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPane1StateChanged(evt);
+                TabbedPaneStateChanged(evt);
             }
         });
 
@@ -190,13 +217,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1))
+                    .addComponent(CustLName)
+                    .addComponent(CustSex, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CustDOB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(CustAddr, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CustContactNo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CustEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CustFName))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -205,35 +232,35 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CustFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CustLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CustSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
+                    .addComponent(CustDOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CustAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CustContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(194, Short.MAX_VALUE))
+                    .addComponent(CustEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Customer", jPanel2);
+        TabbedPane.addTab("Customer", jPanel2);
 
         jLabel9.setText("First Name");
 
@@ -279,16 +306,16 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(27, 27, 27)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField13)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField11)
-                    .addComponent(jTextField10)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField8)
-                    .addComponent(jTextField9)
-                    .addComponent(jTextField12)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(EmpTIN)
+                    .addComponent(EmpHireDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmpContactNo)
+                    .addComponent(EmpAddr)
+                    .addComponent(EmpFName)
+                    .addComponent(EmpLName)
+                    .addComponent(EmpSex)
+                    .addComponent(EmpEmail)
+                    .addComponent(EmpDOB, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(EmpJobCode, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -297,47 +324,47 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmpFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmpLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmpSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                    .addComponent(EmpDOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmpAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmpContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmpTIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmpHireDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField15)
+                    .addComponent(EmpJobCode)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Employee", jPanel3);
+        TabbedPane.addTab("Employee", jPanel3);
 
         jLabel34.setText("Job Position");
 
@@ -357,9 +384,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                    .addComponent(jTextField24)
-                    .addComponent(jTextField25))
+                    .addComponent(JobPos, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(JobDesc)
+                    .addComponent(JobSal))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -368,19 +395,19 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JobPos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JobDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(294, Short.MAX_VALUE))
+                    .addComponent(JobSal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Job", jPanel9);
+        TabbedPane.addTab("Job", jPanel9);
 
         jLabel19.setText("isLockedIn");
 
@@ -390,13 +417,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel22.setText("isFreeWaterAnalysis");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
+        ContLockedIn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "false", "true" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
+        ContWaterDisp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "false", "true" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
+        ContContainer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "false", "true" }));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
+        ContWatAnalysis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "false", "true" }));
 
         jLabel23.setText("Amount per Month");
 
@@ -431,17 +458,17 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ContWatAnalysis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ContWaterDisp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ContLockedIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ContContainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(46, 46, 46))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField14)
-                                    .addComponent(jTextField16)
-                                    .addComponent(jDateChooser4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(ContEDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ContAmtPerMon)
+                                    .addComponent(ContDuration)
+                                    .addComponent(ContSDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -449,8 +476,8 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField17)
-                            .addComponent(jTextField18))
+                            .addComponent(ContCustNo)
+                            .addComponent(ContEmpNo))
                         .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
@@ -459,47 +486,47 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ContLockedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox2)
+                    .addComponent(ContWaterDisp)
                     .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(ContContainer)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox4))
+                    .addComponent(ContWatAnalysis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField14)
+                    .addComponent(ContAmtPerMon)
                     .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField16))
+                    .addComponent(ContDuration))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addComponent(ContSDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel26)
+                    .addComponent(ContEDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-                    .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField17)
+                    .addComponent(ContCustNo)
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField18))
+                    .addComponent(ContEmpNo))
                 .addGap(117, 117, 117))
         );
 
-        jTabbedPane1.addTab("Contract", jPanel4);
+        TabbedPane.addTab("Contract", jPanel4);
 
         jLabel29.setText("Employee No");
 
@@ -528,16 +555,16 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField21, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jDateChooser6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(OrdDeliverAddr, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(OrdDeliverDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(OrdEmpNo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
-                                .addComponent(jTextField23))))
+                                .addComponent(OrdPayNo))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(jTextField22)))
+                        .addComponent(OrdContNo)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -546,27 +573,27 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(OrdEmpNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(OrdDeliverDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField21)
+                    .addComponent(OrdDeliverAddr)
                     .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField22))
+                    .addComponent(OrdContNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField23))
-                .addContainerGap(244, Short.MAX_VALUE))
+                    .addComponent(OrdPayNo))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Order", jPanel5);
+        TabbedPane.addTab("Order", jPanel5);
 
         jLabel37.setText("Payment Date");
 
@@ -583,8 +610,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel38))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser7, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                    .addComponent(jTextField27))
+                    .addComponent(PayDate, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(PayAmt))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -592,16 +619,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PayDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(318, Short.MAX_VALUE))
+                    .addComponent(PayAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Payment", jPanel6);
+        TabbedPane.addTab("Payment", jPanel6);
 
         jLabel39.setText("Supply No");
 
@@ -621,9 +648,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField26)
-                    .addComponent(jTextField28)
-                    .addComponent(jTextField29))
+                    .addComponent(SO_SupplyNo)
+                    .addComponent(SO_OrdNo)
+                    .addComponent(SO_Quantity))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -632,19 +659,19 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SO_SupplyNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SO_OrdNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel41)
-                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(294, Short.MAX_VALUE))
+                    .addComponent(SO_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("SupplyOrder", jPanel8);
+        TabbedPane.addTab("SupplyOrder", jPanel8);
 
         jLabel42.setText("Supply Name");
 
@@ -664,9 +691,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField30, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(jTextField31)
-                    .addComponent(jTextField32))
+                    .addComponent(SupplyName, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(SupplyQOH)
+                    .addComponent(SupplyPrice))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -675,43 +702,88 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
-                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SupplyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
-                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SupplyQOH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(294, Short.MAX_VALUE))
+                    .addComponent(SupplyPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Supply", jPanel7);
+        TabbedPane.addTab("Supply", jPanel7);
 
-        jScrollPane2.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        ScrollPane.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
 
-        jTable2.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        SQLTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CustNo", "CustFName", "CustLName", "CustSex", "CustDOB", "CustAddr", "CustContactNo", "CustEmail"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        SQLTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SQLTableMousePressed(evt);
+            }
+        });
+        ScrollPane.setViewportView(SQLTable);
 
-        jButton1.setText("Update");
+        UpdateButton.setText("Update");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Clear Table");
+        ClearTable.setText("Clear Table");
+        ClearTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearTableActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Delete");
+        DeleteButton.setText("Delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
 
         AddButton.setText("Add");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
+
+        ResetForm.setText("Reset Form");
+        ResetForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetFormActionPerformed(evt);
+            }
+        });
+
+        RemoveDatabase.setText("Remove Database");
+        RemoveDatabase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveDatabaseActionPerformed(evt);
+            }
+        });
+
+        RemoveThisTable.setText("Remove This Table");
+        RemoveThisTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveThisTableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -719,37 +791,48 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(ResetForm, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(AddButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(UpdateButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(DeleteButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ClearTable)
+                                    .addComponent(RemoveDatabase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RemoveThisTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE))
+            .addComponent(JPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1)
+                        .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AddButton)
+                            .addComponent(ClearTable))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5)
-                            .addComponent(AddButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(UpdateButton)
+                            .addComponent(RemoveThisTable))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton4))
+                            .addComponent(DeleteButton)
+                            .addComponent(RemoveDatabase))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ResetForm)
                         .addContainerGap())))
         );
 
@@ -757,14 +840,924 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+    private void TabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPaneStateChanged
         // TODO add your handling code here:
-        javax.swing.JOptionPane.showMessageDialog(rootPane, ((javax.swing.JTabbedPane)evt.getSource()).getSelectedIndex());
-    }//GEN-LAST:event_jTabbedPane1StateChanged
+        int tabIndex = ((javax.swing.JTabbedPane)evt.getSource()).getSelectedIndex();
+        CurrentTabIndex = tabIndex;
+        
+        // Modify Table Headers and Contents
+        ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+    }//GEN-LAST:event_TabbedPaneStateChanged
+
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat sdm = new SimpleDateFormat("yyyy-MM-dd");
+        String CurrentTab = "";
+        
+        switch(CurrentTabIndex) {
+            case 0:
+                CurrentTab = "Customer";
+                DataModel.Customer customer = new DataModel(). new Customer();
+                
+                // Get Contents from Form
+                customer.CustFName = CustFName.getText().strip();
+                customer.CustLName = CustLName.getText().strip();
+                customer.CustSex = CustSex.getText().charAt(0);
+                
+                customer.CustDOB = sdm.format(CustDOB.getDate());
+                
+                customer.CustAddr = CustAddr.getText().strip();
+                customer.CustContactNo = CustContactNo.getText().strip();
+                customer.CustEmail = CustEmail.getText().strip();
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(customer, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Customer Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    CustFName.setText("");
+                    CustLName.setText("");
+                    CustSex.setText("");
+                    CustDOB.setDate(null);
+                    CustAddr.setText("");
+                    CustContactNo.setText("");
+                    CustEmail.setText("");
+                }
+                break;
+            case 1:
+                CurrentTab = "Employee";
+                DataModel.Employee employee = new DataModel(). new Employee();
+                
+                // Get Contents from Form
+                employee.EmpFName = EmpFName.getText().strip();
+                employee.EmpLName = EmpLName.getText().strip();
+                employee.EmpSex = EmpSex.getText().charAt(0);
+                
+                employee.EmpDOB = sdm.format(EmpDOB.getDate());
+                
+                employee.EmpAddr = EmpAddr.getText().strip();
+                employee.EmpContactNo = EmpContactNo.getText().strip();
+                employee.EmpEmail = EmpEmail.getText().strip();
+                
+                employee.EmpTIN = Integer.parseInt(EmpTIN.getText().strip());
+                employee.EmpHireDate = sdm.format(EmpHireDate.getDate());
+                employee.EmpJobCode = Integer.parseInt(EmpJobCode.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(employee, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Employee Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    EmpFName.setText("");
+                    EmpLName.setText("");
+                    EmpSex.setText("");
+                    EmpDOB.setDate(null);
+                    EmpAddr.setText("");
+                    EmpContactNo.setText("");
+                    EmpEmail.setText("");
+                    EmpTIN.setText("");
+                    EmpHireDate.setDate(null);
+                    EmpJobCode.setText("");
+                }
+                break;
+            case 2:
+                CurrentTab = "Job";
+                DataModel.Job job = new DataModel(). new Job();
+                
+                // Get Contents from Form
+                job.JobPos = JobPos.getText().strip();
+                job.JobDesc = JobDesc.getText().strip();
+                job.JobSal = Integer.parseInt(JobSal.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(job, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Job Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    JobPos.setText("");
+                    JobDesc.setText("");
+                    JobSal.setText("");
+                }
+                break;
+            case 3:
+                CurrentTab = "Contract";
+                DataModel.Contract contract = new DataModel(). new Contract();
+                
+                // Get Contents from Form
+                contract.ContLockedIn = Boolean.parseBoolean(ContLockedIn.getSelectedItem().toString());
+                contract.ContWaterDisp = Boolean.parseBoolean(ContWaterDisp.getSelectedItem().toString());
+                contract.ContContainer = Boolean.parseBoolean(ContContainer.getSelectedItem().toString());
+                contract.ContWatAnalysis = Boolean.parseBoolean(ContWatAnalysis.getSelectedItem().toString());
+                
+                contract.ContAmtPerMon = Integer.parseInt(ContAmtPerMon.getText().strip());
+                contract.Duration = Integer.parseInt(ContDuration.getText().strip());
+                
+                contract.ContSDate = sdm.format(ContSDate.getDate());
+                contract.ContEDate = sdm.format(ContEDate.getDate());
+                
+                contract.ContCustNo = Integer.parseInt(ContCustNo.getText().strip());
+                contract.ContEmpNo = Integer.parseInt(ContEmpNo.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(contract, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Contract Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    ContLockedIn.setSelectedIndex(0);
+                    ContWaterDisp.setSelectedIndex(0);
+                    ContContainer.setSelectedIndex(0);
+                    ContWatAnalysis.setSelectedIndex(0);
+
+                    ContAmtPerMon.setText("");
+                    ContDuration.setText("");
+
+                    ContSDate.setDate(null);
+                    ContEDate.setDate(null);
+
+                    ContCustNo.setText("");
+                    ContEmpNo.setText("");
+                }
+                break;
+            case 4:
+                CurrentTab = "Order_";
+                DataModel.Order order = new DataModel(). new Order();
+                
+                // Get Contents from Form
+                order.OrdEmpNo = Integer.parseInt(OrdEmpNo.getText().strip());
+                order.OrdDeliverDate = sdm.format(OrdDeliverDate.getDate());
+                order.OrdDeliverAddr = OrdDeliverAddr.getText().strip();
+                order.OrdContNo = Integer.parseInt(OrdContNo.getText().strip());
+                
+                // Try-Catch here since it is nullable
+                try {
+                    order.OrdPayNo = Integer.parseInt(OrdPayNo.getText().strip());
+                }
+                catch(NumberFormatException ex) {
+                    order.OrdPayNo = null;
+                }
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(order, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Order Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    OrdEmpNo.setText("");
+                    OrdDeliverDate.setDate(null);
+                    OrdDeliverAddr.setText("");
+                    OrdContNo.setText("");
+                    OrdPayNo.setText("");
+                }
+                break;
+
+            case 5:
+                CurrentTab = "Payment";
+                DataModel.Payment payment = new DataModel(). new Payment();
+                
+                // Get Contents from Form
+                payment.PayDate = sdm.format(PayDate.getDate());
+                payment.PayAmt = Integer.parseInt(PayAmt.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(payment, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Payment Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    PayDate.setDate(null);
+                    PayAmt.setText("");
+                }
+                break;
+            case 6:
+                CurrentTab = "SupplyOrder";
+                DataModel.SupplyOrder supply_order = new DataModel(). new SupplyOrder();
+                
+                // Get Contents from Form
+                supply_order.SupplyNo = Integer.parseInt(SO_SupplyNo.getText().strip());
+                supply_order.OrdNo = Integer.parseInt(SO_OrdNo.getText().strip());
+                supply_order.SupplyOrderQty = Integer.parseInt(SO_Quantity.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(supply_order, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Supply Order Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    SO_SupplyNo.setText("");
+                    SO_OrdNo.setText("");
+                    SO_Quantity.setText("");
+                }
+                break;
+            case 7:
+                CurrentTab = "Supply";
+                DataModel.Supply supply = new DataModel(). new Supply();
+                
+                // Get Contents from Form
+                supply.SupplyName = SupplyName.getText().strip();
+                supply.SupplyQOH = Integer.parseInt(SupplyQOH.getText().strip());
+                supply.SupplyPrice = Integer.parseInt(SupplyPrice.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().AddNewItem(supply, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Supply Record Created!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    SupplyName.setText("");
+                    SupplyQOH.setText("");
+                    SupplyPrice.setText("");
+                }
+                break;
+        }
+    }//GEN-LAST:event_AddButtonActionPerformed
+
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+        // TODO add your handling code here:
+        String CurrentTab = "";
+        
+        switch(CurrentTabIndex) {
+            case 0:
+                CurrentTab = "Customer";
+                DataModel.Customer customer = new DataModel(). new Customer();
+                
+                customer.CustNo = CustNo;
+                
+                // Get Contents from Form
+                customer.CustFName = CustFName.getText().strip();
+                customer.CustLName = CustLName.getText().strip();
+                customer.CustSex = CustSex.getText().charAt(0);
+                
+                customer.CustDOB = new SimpleDateFormat("yyyy-MM-dd").format(CustDOB.getDate());
+                
+                customer.CustAddr = CustAddr.getText().strip();
+                customer.CustContactNo = CustContactNo.getText().strip();
+                customer.CustEmail = CustEmail.getText().strip();
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(customer, CurrentTab)) {
+                    
+
+                    JOptionPane.showMessageDialog(rootPane, "Customer Record Updated!");
+
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    CustFName.setText("");
+                    CustLName.setText("");
+                    CustSex.setText("");
+                    CustDOB.setDate(null);
+                    CustAddr.setText("");
+                    CustContactNo.setText("");
+                    CustEmail.setText("");
+                }
+                break;
+            case 1:
+                CurrentTab = "Employee";
+                DataModel.Employee employee = new DataModel(). new Employee();
+                
+                employee.EmpNo = EmpNo;
+                
+                // Get Contents from Form
+                employee.EmpFName = EmpFName.getText().strip();
+                employee.EmpLName = EmpLName.getText().strip();
+                employee.EmpSex = EmpSex.getText().charAt(0);
+                
+                employee.EmpDOB = new SimpleDateFormat("yyyy-MM-dd").format(EmpDOB.getDate());
+                
+                employee.EmpAddr = EmpAddr.getText().strip();
+                employee.EmpContactNo = EmpContactNo.getText().strip();
+                employee.EmpEmail = EmpEmail.getText().strip();
+                
+                employee.EmpTIN = Integer.parseInt(EmpTIN.getText().strip());
+                employee.EmpHireDate = new SimpleDateFormat("yyyy-MM-dd").format(EmpHireDate.getDate());
+                employee.EmpJobCode = Integer.parseInt(EmpJobCode.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(employee, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Employee Record Updated!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    EmpFName.setText("");
+                    EmpLName.setText("");
+                    EmpSex.setText("");
+                    EmpDOB.setDate(null);
+                    EmpAddr.setText("");
+                    EmpContactNo.setText("");
+                    EmpEmail.setText("");
+                    EmpTIN.setText("");
+                    EmpHireDate.setDate(null);
+                    EmpJobCode.setText("");
+                }
+                break;
+            case 2:
+                CurrentTab = "Job";
+                DataModel.Job job = new DataModel(). new Job();
+                
+                job.JobCode = JobCode;
+                
+                // Get Contents from Form
+                job.JobPos = JobPos.getText().strip();
+                job.JobDesc = JobDesc.getText().strip();
+                job.JobSal = Integer.parseInt(JobSal.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(job, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Job Record Updated!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    JobPos.setText("");
+                    JobDesc.setText("");
+                    JobSal.setText("");
+                }
+                break;
+            case 3:
+                CurrentTab = "Contract";
+                DataModel.Contract contract = new DataModel(). new Contract();
+                
+                contract.ContNo = ContNo;
+                
+                // Get Contents from Form
+                contract.ContLockedIn = Boolean.parseBoolean(ContLockedIn.getSelectedItem().toString());
+                contract.ContWaterDisp = Boolean.parseBoolean(ContWaterDisp.getSelectedItem().toString());
+                contract.ContContainer = Boolean.parseBoolean(ContContainer.getSelectedItem().toString());
+                contract.ContWatAnalysis = Boolean.parseBoolean(ContWatAnalysis.getSelectedItem().toString());
+                
+                contract.ContAmtPerMon = Integer.parseInt(ContAmtPerMon.getText().strip());
+                contract.Duration = Integer.parseInt(ContDuration.getText().strip());
+                
+                contract.ContSDate = new SimpleDateFormat("yyyy-MM-dd").format(ContSDate.getDate());
+                contract.ContEDate = new SimpleDateFormat("yyyy-MM-dd").format(ContEDate.getDate());
+                
+                contract.ContCustNo = Integer.parseInt(ContCustNo.getText().strip());
+                contract.ContEmpNo = Integer.parseInt(ContEmpNo.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(contract, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Contract Record Updated!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    ContLockedIn.setSelectedIndex(0);
+                    ContWaterDisp.setSelectedIndex(0);
+                    ContContainer.setSelectedIndex(0);
+                    ContWatAnalysis.setSelectedIndex(0);
+
+                    ContAmtPerMon.setText("");
+                    ContDuration.setText("");
+
+                    ContSDate.setDate(null);
+                    ContEDate.setDate(null);
+
+                    ContCustNo.setText("");
+                    ContEmpNo.setText("");
+                }
+                break;
+            case 4:
+                CurrentTab = "Order_";
+                DataModel.Order order = new DataModel(). new Order();
+                
+                order.OrdNo = OrdNo;
+                
+                // Get Contents from Form
+                order.OrdEmpNo = Integer.parseInt(OrdEmpNo.getText().strip());
+                order.OrdDeliverDate = new SimpleDateFormat("yyyy-MM-dd").format(OrdDeliverDate.getDate());
+                order.OrdDeliverAddr = OrdDeliverAddr.getText().strip();
+                order.OrdContNo = Integer.parseInt(OrdContNo.getText().strip());
+                order.OrdPayNo = Integer.parseInt(OrdPayNo.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(order, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Order Record Updated!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    OrdEmpNo.setText("");
+                    OrdDeliverDate.setDate(null);
+                    OrdDeliverAddr.setText("");
+                    OrdContNo.setText("");
+                    OrdPayNo.setText("");
+                }
+                break;
+            case 5:
+                CurrentTab = "Payment";
+                DataModel.Payment payment = new DataModel(). new Payment();
+                
+                payment.PayNo = PayNo;
+                
+                // Get Contents from Form
+                payment.PayDate = new SimpleDateFormat("yyyy-MM-dd").format(PayDate.getDate());
+                payment.PayAmt = Integer.parseInt(PayAmt.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(payment, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Payment Record Updated!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    PayDate.setDate(null);
+                    PayAmt.setText("");
+                }
+                break;
+            case 6:
+                CurrentTab = "SupplyOrder";
+                DataModel.SupplyOrder supply_order = new DataModel(). new SupplyOrder();
+                
+                supply_order.OldSupplyNo = SO_SupplyNo_;
+                supply_order.OldOrdNo = SO_OrdNo_;
+                
+                // Get Contents from Form
+                supply_order.SupplyNo = Integer.parseInt(SO_SupplyNo.getText().strip());
+                supply_order.OrdNo = Integer.parseInt(SO_OrdNo.getText().strip());
+                supply_order.SupplyOrderQty = Integer.parseInt(SO_Quantity.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(supply_order, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Supply Order Record Updated!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    SO_SupplyNo.setText("");
+                    SO_OrdNo.setText("");
+                    SO_Quantity.setText("");
+                }
+                break;
+            case 7:
+                CurrentTab = "Supply";
+                DataModel.Supply supply = new DataModel(). new Supply();
+                
+                supply.SupplyNo = SupplyNo;
+                
+                // Get Contents from Form
+                supply.SupplyName = SupplyName.getText().strip();
+                supply.SupplyQOH = Integer.parseInt(SupplyQOH.getText().strip());
+                supply.SupplyPrice = Integer.parseInt(SupplyPrice.getText().strip());
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().UpdateExistingItem(supply, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Supply Record Updated!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    SupplyName.setText("");
+                    SupplyQOH.setText("");
+                    SupplyPrice.setText("");
+                }
+                break;
+        }
+    }//GEN-LAST:event_UpdateButtonActionPerformed
+
+    private void SQLTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SQLTableMousePressed
+        int rowSelected = SQLTable.getSelectedRow();
+        
+        switch(CurrentTabIndex) {
+            case 0:
+                try {
+                    CustNo = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                    CustFName.setText(SQLTable.getValueAt(rowSelected, 1).toString());
+                    CustLName.setText(SQLTable.getValueAt(rowSelected, 2).toString());
+                    CustSex.setText(SQLTable.getValueAt(rowSelected, 3).toString());
+                    CustDOB.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 4).toString()));
+                    CustAddr.setText(SQLTable.getValueAt(rowSelected, 5).toString());
+                    CustContactNo.setText(SQLTable.getValueAt(rowSelected, 6).toString());
+                    CustEmail.setText(SQLTable.getValueAt(rowSelected, 7).toString());
+                }
+                catch(ParseException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 1:
+                try {
+                    EmpNo = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                    EmpFName.setText(SQLTable.getValueAt(rowSelected, 1).toString());
+                    EmpLName.setText(SQLTable.getValueAt(rowSelected, 2).toString());
+                    EmpSex.setText(SQLTable.getValueAt(rowSelected, 3).toString());
+                    EmpDOB.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 4).toString()));
+                    EmpAddr.setText(SQLTable.getValueAt(rowSelected, 5).toString());
+                    EmpContactNo.setText(SQLTable.getValueAt(rowSelected, 6).toString());
+                    EmpEmail.setText(SQLTable.getValueAt(rowSelected, 7).toString());
+                    EmpTIN.setText(SQLTable.getValueAt(rowSelected, 8).toString());
+                    EmpHireDate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 9).toString()));
+                    EmpJobCode.setText(SQLTable.getValueAt(rowSelected, 10).toString());
+                }
+                catch(ParseException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 2:  
+                JobCode = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                JobPos.setText(SQLTable.getValueAt(rowSelected, 1).toString());
+                JobDesc.setText(SQLTable.getValueAt(rowSelected, 2).toString());
+                JobSal.setText(SQLTable.getValueAt(rowSelected, 3).toString());
+                break;
+            case 3:
+                try {
+                    ContNo = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                    ContLockedIn.setSelectedItem(SQLTable.getValueAt(rowSelected, 1).toString());
+                    ContWaterDisp.setSelectedItem(SQLTable.getValueAt(rowSelected, 2).toString());
+                    ContContainer.setSelectedItem(SQLTable.getValueAt(rowSelected, 3).toString());
+                    ContWatAnalysis.setSelectedItem(SQLTable.getValueAt(rowSelected, 4).toString());
+                    ContAmtPerMon.setText(SQLTable.getValueAt(rowSelected, 5).toString());
+                    ContDuration.setText(SQLTable.getValueAt(rowSelected, 6).toString());
+                    ContSDate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 7).toString()));
+                    ContEDate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 8).toString()));
+                    ContCustNo.setText(SQLTable.getValueAt(rowSelected, 9).toString());
+                    ContEmpNo.setText(SQLTable.getValueAt(rowSelected, 10).toString());
+                }
+                catch(ParseException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 4:
+                try {
+                    OrdNo = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                    OrdDeliverDate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 1).toString()));
+                    OrdDeliverAddr.setText(SQLTable.getValueAt(rowSelected, 2).toString());
+                    OrdContNo.setText(SQLTable.getValueAt(rowSelected, 3).toString());
+                    OrdPayNo.setText(SQLTable.getValueAt(rowSelected, 4).toString());
+                }
+                catch(ParseException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 5:
+                try {
+                    PayNo = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                    PayDate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(SQLTable.getValueAt(rowSelected, 1).toString()));
+                    PayAmt.setText(SQLTable.getValueAt(rowSelected, 2).toString());
+                }
+                catch(ParseException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 6:
+                SO_SupplyNo.setText(SQLTable.getValueAt(rowSelected, 0).toString());
+                SO_OrdNo.setText(SQLTable.getValueAt(rowSelected, 1).toString());
+                SO_Quantity.setText(SQLTable.getValueAt(rowSelected, 2).toString());
+                
+                SO_SupplyNo_ = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                SO_OrdNo_ = Integer.parseInt(SQLTable.getValueAt(rowSelected, 1).toString());
+                break;
+            case 7:
+                SupplyNo = Integer.parseInt(SQLTable.getValueAt(rowSelected, 0).toString());
+                SupplyName.setText(SQLTable.getValueAt(rowSelected, 1).toString());
+                SupplyQOH.setText(SQLTable.getValueAt(rowSelected, 2).toString());
+                SupplyPrice.setText(SQLTable.getValueAt(rowSelected, 3).toString());
+                break;
+        }
+    }//GEN-LAST:event_SQLTableMousePressed
+
+    private void ResetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetFormActionPerformed
+        // TODO add your handling code here:
+        switch(CurrentTabIndex) {
+            case 0:
+                CustFName.setText("");
+                CustLName.setText("");
+                CustSex.setText("");
+                CustDOB.setDate(null);
+                CustAddr.setText("");
+                CustContactNo.setText("");
+                CustEmail.setText("");
+                break;
+            case 1:
+                EmpFName.setText("");
+                EmpLName.setText("");
+                EmpSex.setText("");
+                EmpDOB.setDate(null);
+                EmpAddr.setText("");
+                EmpContactNo.setText("");
+                EmpEmail.setText("");
+                EmpTIN.setText("");
+                EmpHireDate.setDate(null);
+                EmpJobCode.setText("");
+                break;
+            case 2:
+                JobPos.setText("");
+                JobDesc.setText("");
+                JobSal.setText("");
+                break;
+            case 3:
+                ContLockedIn.setSelectedIndex(0);
+                ContWaterDisp.setSelectedIndex(0);
+                ContContainer.setSelectedIndex(0);
+                ContWatAnalysis.setSelectedIndex(0);
+
+                ContAmtPerMon.setText("");
+                ContDuration.setText("");
+
+                ContSDate.setDate(null);
+                ContEDate.setDate(null);
+
+                ContCustNo.setText("");
+                ContEmpNo.setText("");
+                break;
+            case 4:
+                OrdEmpNo.setText("");
+                OrdDeliverDate.setDate(null);
+                OrdDeliverAddr.setText("");
+                OrdContNo.setText("");
+                OrdPayNo.setText("");
+                break;
+            case 5:
+                PayDate.setDate(null);
+                PayAmt.setText("");
+                break;
+            case 6:
+                SO_SupplyNo.setText("");
+                SO_OrdNo.setText("");
+                SO_Quantity.setText("");
+                break;
+            case 7:
+                SupplyName.setText("");
+                SupplyQOH.setText("");
+                SupplyPrice.setText("");
+                break;
+        }
+    }//GEN-LAST:event_ResetFormActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+        switch(CurrentTabIndex) {
+            case 0:
+                String CurrentTab = "";
+
+                CurrentTab = "Customer";
+                DataModel.Customer customer = new DataModel(). new Customer();
+
+                customer.CustNo = CustNo;
+
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(customer, CurrentTab)) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Customer Record Deleted!");
+                        
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+
+                    // Reset Form
+                    CustFName.setText("");
+                    CustLName.setText("");
+                    CustSex.setText("");
+                    CustDOB.setDate(null);
+                    CustAddr.setText("");
+                    CustContactNo.setText("");
+                    CustEmail.setText("");
+                    }
+                break;
+            case 1:
+                CurrentTab = "Employee";
+                DataModel.Employee employee = new DataModel(). new Employee();
+                
+                employee.EmpNo = EmpNo;
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(employee, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Employee Record Deleted!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    EmpFName.setText("");
+                    EmpLName.setText("");
+                    EmpSex.setText("");
+                    EmpDOB.setDate(null);
+                    EmpAddr.setText("");
+                    EmpContactNo.setText("");
+                    EmpEmail.setText("");
+                    EmpTIN.setText("");
+                    EmpHireDate.setDate(null);
+                    EmpJobCode.setText("");
+                }
+                break;
+            case 2:
+                CurrentTab = "Job";
+                DataModel.Job job = new DataModel(). new Job();
+                
+                job.JobCode = JobCode;
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(job, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Job Record Deleted!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    JobPos.setText("");
+                    JobDesc.setText("");
+                    JobSal.setText("");
+                }
+                break;
+            case 3:
+                CurrentTab = "Contract";
+                DataModel.Contract contract = new DataModel(). new Contract();
+                
+                contract.ContNo = ContNo;
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(contract, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Contract Record Deleted!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    ContLockedIn.setSelectedIndex(0);
+                    ContWaterDisp.setSelectedIndex(0);
+                    ContContainer.setSelectedIndex(0);
+                    ContWatAnalysis.setSelectedIndex(0);
+
+                    ContAmtPerMon.setText("");
+                    ContDuration.setText("");
+
+                    ContSDate.setDate(null);
+                    ContEDate.setDate(null);
+
+                    ContCustNo.setText("");
+                    ContEmpNo.setText("");
+                }
+                break;
+            case 4:
+                CurrentTab = "Order_";
+                DataModel.Order order = new DataModel(). new Order();
+                
+                order.OrdNo = OrdNo;
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(order, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Order Record Deleted!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    OrdEmpNo.setText("");
+                    OrdDeliverDate.setDate(null);
+                    OrdDeliverAddr.setText("");
+                    OrdContNo.setText("");
+                    OrdPayNo.setText("");
+                }
+                break;
+            case 5:
+                CurrentTab = "Payment";
+                DataModel.Payment payment = new DataModel(). new Payment();
+                
+                payment.PayNo = PayNo;
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(payment, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Payment Record Deleted!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    PayDate.setDate(null);
+                    PayAmt.setText("");
+                }
+                break;
+            case 6:
+                CurrentTab = "SupplyOrder";
+                DataModel.SupplyOrder supply_order = new DataModel(). new SupplyOrder();
+                
+                supply_order.SupplyNo = SO_SupplyNo_;
+                supply_order.OrdNo = SO_OrdNo_;
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(supply_order, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Supply Order Record Deleted!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    SO_SupplyNo.setText("");
+                    SO_OrdNo.setText("");
+                    SO_Quantity.setText("");
+                }
+                break;
+            case 7:
+                CurrentTab = "Supply";
+                DataModel.Supply supply = new DataModel(). new Supply();
+                
+                supply.SupplyNo = SupplyNo;
+                
+                // Send To Database
+                if(ApplicationHelper.getHelper().DeleteExistingItem(supply, CurrentTab)) {
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Supply Record Deleted!");
+                    
+                    // Read From Database
+                    ApplicationHelper.getHelper().ReadExistingItems(SQLTable, CurrentTabIndex);
+                    
+                    // Reset Form
+                    SupplyName.setText("");
+                    SupplyQOH.setText("");
+                    SupplyPrice.setText("");
+                }
+                break;
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void ClearTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearTableActionPerformed
+        // TODO add your handling code here:
+        
+        switch(CurrentTabIndex) {
+            case 0:
+                break;
+            case 1:
+                //CurrentTab = "Employee";
+                break;
+            case 2:
+                //CurrentTab = "Job";
+                break;
+            case 3:
+                //CurrentTab = "Contract";
+                break;
+            case 4:
+                //CurrentTab = "Order_";
+                break;
+            case 5:
+                //CurrentTab = "Payment";
+                break;
+            case 6:
+                //CurrentTab = "SupplyOrder";
+                break;
+            case 7:
+                //CurrentTab = "Supply";
+                break;
+        }
+    }//GEN-LAST:event_ClearTableActionPerformed
+
+    private void RemoveDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveDatabaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RemoveDatabaseActionPerformed
+
+    private void RemoveThisTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveThisTableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RemoveThisTableActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Flat look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -801,20 +1794,59 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
-    private com.toedter.calendar.JDateChooser jDateChooser4;
-    private com.toedter.calendar.JDateChooser jDateChooser5;
-    private com.toedter.calendar.JDateChooser jDateChooser6;
-    private com.toedter.calendar.JDateChooser jDateChooser7;
+    private javax.swing.JButton ClearTable;
+    private javax.swing.JTextField ContAmtPerMon;
+    private javax.swing.JComboBox<String> ContContainer;
+    private javax.swing.JTextField ContCustNo;
+    private javax.swing.JTextField ContDuration;
+    private com.toedter.calendar.JDateChooser ContEDate;
+    private javax.swing.JTextField ContEmpNo;
+    private javax.swing.JComboBox<String> ContLockedIn;
+    private com.toedter.calendar.JDateChooser ContSDate;
+    private javax.swing.JComboBox<String> ContWatAnalysis;
+    private javax.swing.JComboBox<String> ContWaterDisp;
+    private javax.swing.JTextField CustAddr;
+    private javax.swing.JTextField CustContactNo;
+    private com.toedter.calendar.JDateChooser CustDOB;
+    private javax.swing.JTextField CustEmail;
+    private javax.swing.JTextField CustFName;
+    private javax.swing.JTextField CustLName;
+    private javax.swing.JTextField CustSex;
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JTextField EmpAddr;
+    private javax.swing.JTextField EmpContactNo;
+    private com.toedter.calendar.JDateChooser EmpDOB;
+    private javax.swing.JTextField EmpEmail;
+    private javax.swing.JTextField EmpFName;
+    private com.toedter.calendar.JDateChooser EmpHireDate;
+    private javax.swing.JTextField EmpJobCode;
+    private javax.swing.JTextField EmpLName;
+    private javax.swing.JTextField EmpSex;
+    private javax.swing.JTextField EmpTIN;
+    private javax.swing.JPanel JPanel1;
+    private javax.swing.JTextField JobDesc;
+    private javax.swing.JTextField JobPos;
+    private javax.swing.JTextField JobSal;
+    private javax.swing.JTextField OrdContNo;
+    private javax.swing.JTextField OrdDeliverAddr;
+    private com.toedter.calendar.JDateChooser OrdDeliverDate;
+    private javax.swing.JTextField OrdEmpNo;
+    private javax.swing.JTextField OrdPayNo;
+    private javax.swing.JTextField PayAmt;
+    private com.toedter.calendar.JDateChooser PayDate;
+    private javax.swing.JButton RemoveDatabase;
+    private javax.swing.JButton RemoveThisTable;
+    private javax.swing.JButton ResetForm;
+    private javax.swing.JTextField SO_OrdNo;
+    private javax.swing.JTextField SO_Quantity;
+    private javax.swing.JTextField SO_SupplyNo;
+    private javax.swing.JTable SQLTable;
+    private javax.swing.JScrollPane ScrollPane;
+    private javax.swing.JTextField SupplyName;
+    private javax.swing.JTextField SupplyPrice;
+    private javax.swing.JTextField SupplyQOH;
+    private javax.swing.JTabbedPane TabbedPane;
+    private javax.swing.JButton UpdateButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -859,7 +1891,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -868,40 +1899,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
